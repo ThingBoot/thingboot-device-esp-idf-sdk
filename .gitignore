@@ -1,0 +1,12 @@
+# ESP-IDF 构建产物
+build/
+sdkconfig
+sdkconfig.old
+sdkconfig.*
+managed_components/
+dependencies.lock
+
+# PlatformIO
+.pio/
+
+__pycache__/
