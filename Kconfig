@@ -1,0 +1,13 @@
+menu "ThingBoot Device SDK"
+
+config TBD_ETHER
+    bool "Enable Ethernet (W5500) support"
+    default n
+    help
+        启用后链接 libthingboot_device_<芯片>_ether.a 变体库，
+        公开 ThingBootNetwork 的以太网接口。
+        同时请在 sdkconfig 中启用：
+            CONFIG_ETH_USE_SPI_ETHERNET=y
+            CONFIG_ETH_SPI_ETHERNET_W5500=y
+
+endmenu
