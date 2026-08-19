@@ -1,0 +1,7 @@
+version: "1.16.1"
+description: "ThingBoot Device SDK - connect ESP devices quickly to ThingBoot IoT platform"
+url: "https://github.com/ThingBoot/thingboot-device-esp-idf-sdk"
+maintainer: "ThingBoot <support@thingboot.com>"
+tags:
+  - thingboot
+  - iot
