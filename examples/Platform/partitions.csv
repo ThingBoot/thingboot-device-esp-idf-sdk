@@ -1,0 +1,12 @@
+# ThingBoot SDK partition table (4MB flash)
+# NOTE: keep this file ASCII-only - PlatformIO parses it with the system locale codec (GBK on zh-CN Windows)
+# Dual OTA layout: ota_0/ota_1 ~1.9MB each (default 1MB factory partition cannot hold the firmware)
+# nvs enlarged to 64KB; spiffs reserved for factory pre-provisioned config:
+# rom_init() imports it into NVS on first boot, then erases it (partition label must be "spiffs")
+# Name,   Type, SubType, Offset,   Size,      Flags
+nvs,      data, nvs,     0x9000,   0x10000,
+otadata,  data, ota,     0x19000,  0x2000,
+phy_init, data, phy,     0x1b000,  0x1000,
+ota_0,    app,  ota_0,   0x20000,  0x1E0000,
+ota_1,    app,  ota_1,   0x200000, 0x1E0000,
+spiffs,   data, spiffs,  0x3E0000, 0x2000,
