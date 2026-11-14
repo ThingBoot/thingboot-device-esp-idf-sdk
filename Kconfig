@@ -1,0 +1,42 @@
+menu "ThingBoot Device SDK"
+
+config TBD_ETHER
+    bool "Enable Ethernet (W5500) support"
+    default n
+    help
+        启用后在 base 库之上追加链接 addon_net_ether_<芯片>.a。
+        还需在 app_main 中 device.setup() 前调用 tb_addon_net_ether_install()，
+        并在 sdkconfig 中启用：
+            CONFIG_ETH_USE_SPI_ETHERNET=y
+            CONFIG_ETH_SPI_ETHERNET_W5500=y
+
+config TBD_GSM
+    bool "Enable GSM/4G (ML307) support"
+    default n
+    help
+        启用后在 base 库之上追加链接 addon_net_gsm_<芯片>.a。
+        还需：① 在本工程的 idf_component.yml 添加依赖 espressif/esp_modem: ^2.0.0；
+        ② 在 app_main 中 device.setup() 前调用 tb_addon_net_gsm_install()。
+
+config TBD_BLE
+    bool "Enable BLE provisioning support"
+    default n
+    help
+        启用后在 base 库之上追加链接 addon_net_ble_<芯片>.a，
+        开启 BLE 配网（wifi_provisioning BLE scheme）与 BLE 控制。
+        还需在 app_main 中 device.setup() 前调用 tb_addon_net_ble_install()，
+        并在 sdkconfig 中启用：
+            CONFIG_BT_ENABLED=y
+            CONFIG_BT_NIMBLE_ENABLED=y
+
+config TBD_GATEWAY
+    bool "Enable gateway (child device table) support"
+    default n
+    help
+        启用后在 base 库之上追加链接 addon_gateway_<芯片>.a，
+        开启网关角色：子设备表维护（NVS 持久化）、平台命令转发、
+        上下线事件上报。install 即角色：在 app_main 中 device.setup() 前
+        调用 tb_addon_gateway_install()，并用 device.Gateway.onChildOrder()
+        注册子设备命令回调（产品的传输层在回调中下发）。
+
+endmenu
